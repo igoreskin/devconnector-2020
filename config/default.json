@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://igoreskin:MongoDB20@cluster0.kbdpm.mongodb.net/devconnector-2020?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
+}
