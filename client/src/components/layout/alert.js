@@ -1,20 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Fragment, useContext } from 'react';
+// import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
+import RootContext from '../../context';
 
-const Alert = ({ alerts }) => 
-  alerts !== null && alerts.length > 0 && alerts.map(alert => (
-    <div key={alert.id} className={`alert alert-${alert.alertType}`}>
-      { alert.msg }
-    </div>
-  ));
+const Alert = (props) => {
 
-Alert.propTypes = {
-  alerts: PropTypes.array.isRequired
+  const { state, dispatch } = useContext(RootContext);
+
+  return (
+    <Fragment>
+      {state.alert && state.alert.length > 0 && state.alert.map(alert => (
+        <div key={alert.id} className={`alert alert-${alert.alertType}`}>
+          { alert.msg}
+        </div>
+      ))}
+    </Fragment>
+  )
 }
 
-const mapStateToProps = state => ({
-  alerts: state.alert
-});
+// Alert.propTypes = {
+//   alerts: PropTypes.array.isRequired
+// }
 
-export default connect(mapStateToProps)(Alert);
+// const mapStateToProps = state => ({
+//   alerts: state.alert
+// });
+
+export default Alert;

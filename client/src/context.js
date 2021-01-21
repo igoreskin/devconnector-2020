@@ -1,7 +1,7 @@
 import React from 'react';
 
-const rootContext = React.createContext({
+const RootContext = React.createContext({
   alerts: []
 });
 
-export default rootContext;
+export default RootContext;

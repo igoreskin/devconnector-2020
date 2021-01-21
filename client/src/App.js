@@ -6,29 +6,41 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login'; 
 import Alert from './components/layout/Alert';
 // Redux
-import { Provider } from 'react-redux';
-import store from './store';
+// import { Provider } from 'react-redux';
+// import store from './store';
 
-import rootContext from './context';
+import RootContext from './context';
+import rootReducer from './reducers';
 
 import './App.css';
 
 
-const App = () => 
-<Provider store={store}>
-  <Router>
-    <Fragment>
-      <Navbar />
-      <Route exact path="/" component={Landing} />
-      <section className="container">
-        <Alert />
-        <Switch>
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-        </Switch>
-      </section>
-    </Fragment>
-  </Router>
-</Provider>
+const App = () => {
+
+  const initialState = useContext(RootContext);
+  const [state, dispatch] = useReducer(rootReducer, initialState)
+
+  console.log('STATE IN APP: ', state)
+
+  return (
+    // <Provider store={store}>
+    <RootContext.Provider value={{state, dispatch}}>
+      <Router>
+        <Fragment>
+          <Navbar />
+          <Route exact path="/" component={Landing} />
+          <section className="container">
+            <Alert />
+            <Switch>
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+            </Switch>
+          </section>
+        </Fragment>
+      </Router>
+    </RootContext.Provider>
+    // </Provider>
+  )
+}
 
 export default App;
